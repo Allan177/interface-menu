@@ -59,7 +59,7 @@ export default function LoginForm() {
         const email = formData.get("email") as string;
         const password = formData.get("password") as string;
 
-        console.log("Tentando login com:", { email, password, username }); // Log importante
+        console.log("Tentando login com:", { email, password, username });
 
         try {
             const response = await axios.post(`http://localhost:8080/${username}/client/login`, {
@@ -67,7 +67,7 @@ export default function LoginForm() {
                 password,
             });
 
-            console.log("Resposta da API:", response); // Log da resposta completa
+            console.log("Resposta da API:", response);
 
             if (response.status !== 200) {
                 throw new Error(response.data.message || 'Falha na autenticação.');
@@ -76,7 +76,6 @@ export default function LoginForm() {
             if (response.status === 200) {
                 const client = response.data;
                 console.log("CLIENT:", client);
-
                 try {
                     localStorage.setItem('clientInfo', JSON.stringify(client));
                     console.log("Dados do cliente salvos no localStorage");
@@ -84,14 +83,13 @@ export default function LoginForm() {
                     console.error("Erro ao salvar no localStorage:", localStorageError);
                     setError("Erro ao salvar os dados do cliente.");
                 }
+                router.push(`/cardapioja.com/${username}/`);
             }
-
-            router.push(`/cardapioja.com/${username}/`);
 
         } catch (error: any) {
             console.error('Erro durante o login:', error);
             if (axios.isAxiosError(error)) {
-                console.error("Detalhes do erro Axios:", error.response?.data, error.response?.status); // Log mais detalhado
+                console.error("Detalhes do erro Axios:", error.response?.data, error.response?.status);
                 if (error.response) {
                     setError(error.response.data.message || `Erro ${error.response.status}`);
                 } else if (error.request) {
@@ -115,7 +113,7 @@ export default function LoginForm() {
                 transition={{ duration: 0.5 }}
                 className="w-full max-w-md bg-gray-800 p-10 rounded-3xl shadow-2xl text-center space-y-6"
             >
-                <h2 className="text-4xl font-extrabold text-gray-200">Bem-vindo de volta</h2>
+                <h2 className="text-4xl font-extrabold text-gray-200">Bem-vindo</h2>
 
                 {error && (
                     <div className="bg-red-600/30 text-red-400 p-3 rounded-lg">

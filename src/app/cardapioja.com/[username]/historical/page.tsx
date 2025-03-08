@@ -134,9 +134,15 @@ const HistoricalPage = () => {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
-                <p>Carregando informações e histórico de pedidos...</p>
-            </div>
+           
+                       <div className="flex items-center justify-center h-screen bg-black">
+                           <div className="relative flex space-x-4 ">
+                               <div className="w-5 h-5 bg-blue-500 rounded-full animate-bounce"></div>
+                               <div className="w-5 h-5 bg-green-500 rounded-full animate-bounce delay-150"></div>
+                               <div className="w-5 h-5 bg-red-500 rounded-full animate-bounce delay-300"></div>
+                           </div>
+                       </div>
+
         );
     }
 
@@ -156,6 +162,8 @@ const HistoricalPage = () => {
             </div>
         );
     }
+
+
 
     return (
         <div className="bg-gray-950 min-h-screen text-gray-100">

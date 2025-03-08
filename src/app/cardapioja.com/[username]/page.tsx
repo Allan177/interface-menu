@@ -476,18 +476,12 @@ export default function CardapioPage() {
       {/* Navbar */}
       <nav className="w-full h-16 bg-gray-950 backdrop-blur-lg flex justify-between items-center px-6">
         <div className="flex items-center gap-4 sm:gap-6"> {/* Ajuste o espaçamento */}
-          <button
-            onClick={() => router.push('/')}
-            className="px-3 py-2 text-white font-semibold hover:bg-gray-700 transition" // Reduzi o padding horizontal
-          >
-            Home
+        <button>
+            <p className="font-bold text-xl sm:text-2xl hover:text-gray-300 transition duration-300"> {/* Ajuste o tamanho da fonte */}
+              {username}
+            </p>
           </button>
-          <button
-            onClick={() => router.push('https://github.com/jefter-dev/menu')}
-            className="px-3 py-2 text-white font-semibold hover:bg-gray-700 transition" // Reduzi o padding horizontal
-          >
-            GitHub
-          </button>
+         
 
           {/* Menu Categorias (Dropdown) */}
           <div className="relative">
@@ -518,11 +512,7 @@ export default function CardapioPage() {
 
         {/* User Info / Login */}
         <div className="text-white flex items-center gap-2 sm:gap-3">  {/* Ajuste o espaçamento */}
-          <Link href={'/'}>
-            <p className="font-bold text-xl sm:text-2xl hover:text-gray-300 transition duration-300"> {/* Ajuste o tamanho da fonte */}
-              {username}
-            </p>
-          </Link>
+         
 
           {/* Botão de Perfil */}
           <button
@@ -570,17 +560,6 @@ export default function CardapioPage() {
   </div>
 )}
 
-
-          {/* Mostrar botão de login se não houver informações do cliente */}
-          {clientInfo ? (
-            <button onClick={handleFinalizarCompra} className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">
-              {clientInfo.name}
-            </button>
-          ) : (
-            <button onClick={() => router.push(`/cardapioja.com/${username}/login`)} className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">
-              Faça Login para Comprar
-            </button>
-          )}
         </div>
       </nav>
 
@@ -668,12 +647,13 @@ export default function CardapioPage() {
                         >
                           <div className="p-2 flex flex-col justify-between h-full">
                             <figure className="mb-1">
-                              <div className="relative w-full h-48 sm:h-60"> {/* Ajuste a altura */}
+                              <div className="relative w-full h-80 sm:h-80"> {/* Ajuste a altura */}
                                 {product.image ? (
                                   <img
                                     src={getProductImageUrl(product)}
                                     alt={product.name}
                                     className="w-full h-full object-cover rounded-md ml-auto mr-auto"
+                                    style={{ objectFit: 'contain' }} // Garante que a imagem caiba no espaço
                                   />
                                 ) : (
                                   <img
@@ -723,11 +703,7 @@ export default function CardapioPage() {
                 <h2 className="text-xl sm:text-2xl font-semibold text-gray-100 mb-2 sm:mb-4"> {/* Ajuste o tamanho da fonte e espaçamento */}
                   Adicionais para {selectedProduct?.name}
                 </h2>
-                {selectedProduct && (
-                  <p className="text-gray-400 mb-2">
-                    Você pode selecionar até {selectedProduct.additionalQuantity} adicionais.
-                  </p>
-                )}
+                {/* Removida a mensagem da quantidade de adicionais */}
                 {loadingAdditionals ? (
                   <div role="status">
                     <svg
