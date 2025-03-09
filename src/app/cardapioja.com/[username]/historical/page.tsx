@@ -132,6 +132,13 @@ const HistoricalPage = () => {
         fetchClientInfo();
     }, [username, router]);
 
+     const getProductImageUrl = (product: Product) => {
+        if (product?.image && product.id) {
+            return `http://localhost:8080/uploads/product/${product.id}/${product.image}`;
+        }
+        return '/assets/placeholder.png';
+    }
+
     if (loading) {
         return (
            
@@ -210,9 +217,25 @@ const HistoricalPage = () => {
 
                                 <h4 className="font-semibold mt-2">Itens do Pedido:</h4>
                                 <ul className="list-disc pl-5">
-                                    {order.orderItems.map(item => (
+                                    {order.orderItems.map(item => {
+                                        console.log("Objeto Product no HistoricalPage:", item.product);
+                                     return (
                                         <li key={item.id}>
                                             {item.product.name} x {item.quantity} - R$ {item.price.toFixed(2)}
+                                             {/* Adicionando a imagem do produto */}
+                                            {item.product.image ? (
+                                                <img
+                                                    src={getProductImageUrl(item.product)}
+                                                    alt={item.product.name}
+                                                    className="w-20 h-20 object-cover rounded mt-2"
+                                                />
+                                            ) : (
+                                                <img
+                                                    src="/assets/placeholder.png"
+                                                    alt="Placeholder"
+                                                    className="w-20 h-20 object-cover rounded mt-2"
+                                                />
+                                            )}
                                             {item.orderItemAdditional && item.orderItemAdditional.length > 0 && (
                                                 <ul className="list-inside list-disc pl-5">
                                                     {item.orderItemAdditional.map(additionalItem => (
@@ -223,7 +246,8 @@ const HistoricalPage = () => {
                                                 </ul>
                                             )}
                                         </li>
-                                    ))}
+                                    );
+                                    })}
                                 </ul>
                             </div>
                         ))}

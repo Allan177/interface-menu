@@ -313,20 +313,28 @@ export default function CardapioPage() {
     }
 
   const handleAddToCart = (product: Product) => {
-    const itemIndex = cartItems.findIndex(item => item.product.id === product.id);
-    if (itemIndex > -1) {
-      const newCartItems = [...cartItems];
-      newCartItems[itemIndex].quantity += 1;
-      // Only add additionals if they exist and are selected.
-      newCartItems[itemIndex].additionals = selectedAdditionals.length > 0 ? selectedAdditionals : undefined;
-      setCartItems(newCartItems);
-    } else {
-      // Only add additionals if they exist and are selected.
-      setCartItems([...cartItems, { product, quantity: 1, additionals: selectedAdditionals.length > 0 ? selectedAdditionals : undefined }]);
-    }
+    console.log("handleAddToCart - Produto:", product);
+    console.log("handleAddToCart - Adicionais Selecionados:", selectedAdditionals);
+
+    setCartItems(prevItems => {
+        const itemIndex = prevItems.findIndex(item => item.product.id === product.id);
+        if (itemIndex > -1) {
+            const newCartItems = [...prevItems];
+            newCartItems[itemIndex] = {
+                ...newCartItems[itemIndex],
+                quantity: newCartItems[itemIndex].quantity + 1,
+                additionals: selectedAdditionals.length > 0 ? selectedAdditionals : newCartItems[itemIndex].additionals
+            };
+            console.log("handleAddToCart - Carrinho atualizado:", newCartItems);
+            return newCartItems;
+        } else {
+            console.log("handleAddToCart - Novo item adicionado ao carrinho:", { product, quantity: 1, additionals: selectedAdditionals.length > 0 ? selectedAdditionals : undefined });
+            return [...prevItems, { product, quantity: 1, additionals: selectedAdditionals.length > 0 ? selectedAdditionals : undefined }];
+        }
+    });
     handleCloseModal();
     setSelectedAdditionals([]);
-  };
+};
 
 
     const handleCheckboxChange = (additional: Additional) => {
@@ -345,15 +353,16 @@ export default function CardapioPage() {
   const calculateTotalPrice = (items: CartItem[]) => {
     let total = 0;
     items.forEach(item => {
-      total += item.product.price * item.quantity;
-      if (item.additionals) {
-        item.additionals.forEach(add => {
-          total += add.price
-        })
-      }
-    })
+        total += item.product.price * item.quantity;
+        if (item.additionals) {
+            item.additionals.forEach(add => {
+                total += add.price; // Adiciona o preço de cada adicional
+            });
+        }
+    });
+    console.log("calculateTotalPrice - Total calculado:", total);
     return total;
-  };
+};
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -431,6 +440,8 @@ export default function CardapioPage() {
                 },
                 status: "PENDING"
             };
+
+        console.log("handleFinalizarCompra - Dados do pedido:", orderData);
     
             const response = await fetch('http://localhost:8080/order', {
                 method: 'POST',
