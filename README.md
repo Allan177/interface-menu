@@ -34,7 +34,13 @@ Para rodar o projeto localmente, siga os passos abaixo:
 3. **Inicie o servidor de desenvolvimento:**  
    ```bash
    npm run dev
-** precione Ctrl e clique em cima de http://localhost:3000 **
+*
+
+4. **Simular o serviço na url:**  
+   ```
+   localhost://cardapioja.com/{usuario}
+
+
 
 ## 📄 Licença
 Este projeto não possui uma licença definida. Caso queira utilizá-lo ou modificá-lo, entre em contato com o autor.
