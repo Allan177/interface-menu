@@ -4,6 +4,11 @@ Este projeto tem como objetivo estabelecer uma conexão entre cliente e usuário
 
 A interface foi desenvolvida de forma simples e intuitiva, garantindo que qualquer pessoa possa utilizá-la sem dificuldades.  
 
+## 👥 Participantes
+ - Jéfter Lucas @jefter-dev
+ - Jorge Allan @Allan177
+ - José Davi @DaviJ13
+
 ## 🚀 Tecnologias Utilizadas
 
 - [Next.js](https://nextjs.org/) – Framework React para aplicações web modernas.  
