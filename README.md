@@ -43,6 +43,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
 4. **Simular o serviço na url:**  
    ```
    localhost://cardapioja.com/{usuario}
+   exemplo: http://localhost:3000/cardapioja.com/brabos
 
 ## 📄 Licença
 Este projeto não possui uma licença definida. Caso queira utilizá-lo ou modificá-lo, entre em contato com o autor.
